@@ -28,18 +28,25 @@ package com.queuedpixel.thingnamer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Main
 {
     public static void main( String[] args ) throws Exception
     {
-        System.out.println( "Word List:" );
+        ArrayList< String > wordList = new ArrayList<>();
         BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ));
         String line = reader.readLine();
         while ( line != null )
         {
-            System.out.println( "- " + line );
+            wordList.add( line );
             line = reader.readLine();
+        }
+
+        System.out.println( "Word List:" );
+        for ( String word : wordList )
+        {
+            System.out.println( word );
         }
     }
 }
