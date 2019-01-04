@@ -47,14 +47,7 @@ public class Main
             line = reader.readLine();
         }
 
-        System.out.println( "Word List:" );
-        for ( String word : wordList )
-        {
-            System.out.println( "- " + word );
-        }
-
         Random random = new Random();
-        System.out.println( "Random Names:" );
         for ( int i = 0; i < nameCount; i++ )
         {
             String name = "";
@@ -65,7 +58,7 @@ public class Main
                 name += wordList.get( index );
             }
 
-            System.out.println( "- " + name );
+            System.out.println( name );
         }
     }
 }
