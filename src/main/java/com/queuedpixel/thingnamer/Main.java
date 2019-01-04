@@ -29,11 +29,15 @@ package com.queuedpixel.thingnamer;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Main
 {
     public static void main( String[] args ) throws Exception
     {
+        int nameCount = 10;
+        int wordCount = 2;
+
         ArrayList< String > wordList = new ArrayList<>();
         BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ));
         String line = reader.readLine();
@@ -46,7 +50,22 @@ public class Main
         System.out.println( "Word List:" );
         for ( String word : wordList )
         {
-            System.out.println( word );
+            System.out.println( "- " + word );
+        }
+
+        Random random = new Random();
+        System.out.println( "Random Names:" );
+        for ( int i = 0; i < nameCount; i++ )
+        {
+            String name = "";
+            for ( int j = 0; j < wordCount; j++ )
+            {
+                if ( name.length() > 0 ) name += "-";
+                int index = random.nextInt( wordList.size() );
+                name += wordList.get( index );
+            }
+
+            System.out.println( "- " + name );
         }
     }
 }
