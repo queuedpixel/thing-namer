@@ -26,10 +26,20 @@ SOFTWARE.
 
 package com.queuedpixel.thingnamer;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class Main
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
-        System.out.println( "Hello, world!" );
+        System.out.println( "Word List:" );
+        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ));
+        String line = reader.readLine();
+        while ( line != null )
+        {
+            System.out.println( "- " + line );
+            line = reader.readLine();
+        }
     }
 }
