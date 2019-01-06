@@ -119,13 +119,13 @@ public class Parser
             partsOfSpeech.add( partOfSpeech );
         }
 
-        try ( PrintWriter nounWriter      = new PrintWriter( "nouns.txt"      );
-              PrintWriter adjectiveWriter = new PrintWriter( "adjectives.txt" ))
+        try ( PrintWriter adjectiveWriter = new PrintWriter( "adjectives.txt" );
+              PrintWriter nounWriter      = new PrintWriter( "nouns.txt"      ))
         {
             for ( String entry : entries.keySet() )
             {
-                if ( entries.get( entry ).contains( "noun"      )) nounWriter.println(      entry );
                 if ( entries.get( entry ).contains( "adjective" )) adjectiveWriter.println( entry );
+                if ( entries.get( entry ).contains( "noun"      )) nounWriter.println(      entry );
             }
         }
     }

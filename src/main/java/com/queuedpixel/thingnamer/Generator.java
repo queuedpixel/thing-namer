@@ -40,14 +40,14 @@ public class Generator
         int maxSize   = 8;
         int nameCount = 10;
 
-        List< String > nouns      = Generator.readWordList( "nouns.txt",      minSize, maxSize );
         List< String > adjectives = Generator.readWordList( "adjectives.txt", minSize, maxSize );
+        List< String > nouns      = Generator.readWordList( "nouns.txt",      minSize, maxSize );
 
         Random random = new Random();
         for ( int i = 0; i < nameCount; i++ )
         {
-            int nounIndex      = random.nextInt( nouns.size()      );
             int adjectiveIndex = random.nextInt( adjectives.size() );
+            int nounIndex      = random.nextInt( nouns.size()      );
             String name = adjectives.get( adjectiveIndex ) + "-" + nouns.get( nounIndex );
             System.out.println( name );
         }
