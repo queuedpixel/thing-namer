@@ -47,9 +47,20 @@ public class Parser
 
         String contents = builder.toString();
         Collection< String > paragraphs = Parser.getParagraphs( contents );
+        boolean first = true;
         for ( String paragraph : paragraphs )
         {
-            System.out.println( "Entry: " + Parser.getEntry( paragraph ));
+            if ( first )
+            {
+                first = false;
+            }
+            else
+            {
+                System.out.println();
+            }
+
+            System.out.println( "Entry          : " + Parser.getEntry(        paragraph ));
+            System.out.println( "Part of Speech : " + Parser.getPartOfSpeech( paragraph ));
         }
     }
 
@@ -73,13 +84,20 @@ public class Parser
 
     private static String getEntry( String paragraph )
     {
-        String entryStart = "<ent>";
-        String entryEnd   = "</ent>";
+        return Parser.getTag( paragraph, "<ent>", "</ent>" );
+    }
 
-        int start = paragraph.indexOf( entryStart );
-        int end   = paragraph.indexOf( entryEnd   );
+    private static String getPartOfSpeech( String paragraph )
+    {
+        return Parser.getTag( paragraph, "<pos>", "</pos>" );
+    }
+
+    private static String getTag( String content, String tagStart, String tagEnd )
+    {
+        int start = content.indexOf( tagStart );
+        int end   = content.indexOf( tagEnd   );
         if ( start < 0 ) return null;
-        start += entryStart.length();
-        return paragraph.substring( start, end );
+        start += tagStart.length();
+        return content.substring( start, end );
     }
 }
