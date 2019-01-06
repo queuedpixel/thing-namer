@@ -67,14 +67,27 @@ public class Parser
         Map< String, Set< String >> entries = new LinkedHashMap<>();
         for ( String paragraph : paragraphs )
         {
-            String entry        = Parser.getEntry(        paragraph );
-            String partOfSpeech = Parser.getPartOfSpeech( paragraph );
+            String entry        = Parser.getTag( paragraph, "<ent>",  "<" );
+            String partOfSpeech = Parser.getTag( paragraph, "<pos>",  "<" );
+            String mark         = Parser.getTag( paragraph, "<mark>", "<" );
 
             // ignore null entries
             if (( entry == null ) || ( partOfSpeech == null )) continue;
 
             // ignore words that aren't composed of only letters
             if ( !entry.matches( "[a-zA-Z][a-z]*" )) continue;
+
+            // ignore words that are offensive, vulgar, etc.
+            if ( mark != null )
+            {
+                mark = mark.toLowerCase();
+                if ( mark.contains( "contemptuous" )) continue;
+                if ( mark.contains( "derog"        )) continue; // short for: derogatory
+                if ( mark.contains( "disparaging"  )) continue;
+                if ( mark.contains( "offensive"    )) continue;
+                if ( mark.contains( "slang"        )) continue;
+                if ( mark.contains( "vulgar"       )) continue;
+            }
 
             // convert the entry to lower case
             entry = entry.toLowerCase();
@@ -152,16 +165,6 @@ public class Parser
         }
 
         return strings;
-    }
-
-    private static String getEntry( String paragraph )
-    {
-        return Parser.getTag( paragraph, "<ent>", "<" );
-    }
-
-    private static String getPartOfSpeech( String paragraph )
-    {
-        return Parser.getTag( paragraph, "<pos>", "<" );
     }
 
     private static String getTag( String content, String tagStart, String tagEnd )
