@@ -27,8 +27,9 @@ SOFTWARE.
 package com.queuedpixel.thingnamer;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Main
@@ -36,29 +37,34 @@ public class Main
     public static void main( String[] args ) throws Exception
     {
         int nameCount = 10;
-        int wordCount = 2;
 
-        ArrayList< String > wordList = new ArrayList<>();
-        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ));
-        String line = reader.readLine();
-        while ( line != null )
-        {
-            wordList.add( line );
-            line = reader.readLine();
-        }
+        List< String > nouns      = Main.readWordList( "nouns.txt" );
+        List< String > adjectives = Main.readWordList( "adjectives.txt" );
 
         Random random = new Random();
         for ( int i = 0; i < nameCount; i++ )
         {
-            String name = "";
-            for ( int j = 0; j < wordCount; j++ )
-            {
-                if ( name.length() > 0 ) name += "-";
-                int index = random.nextInt( wordList.size() );
-                name += wordList.get( index );
-            }
-
+            int nounIndex      = random.nextInt( nouns.size()      );
+            int adjectiveIndex = random.nextInt( adjectives.size() );
+            String name = adjectives.get( adjectiveIndex ) + "-" + nouns.get( nounIndex );
             System.out.println( name );
         }
+    }
+
+    private static List< String> readWordList(String fileName ) throws Exception
+    {
+        List< String > words = new ArrayList<>();
+
+        try ( BufferedReader reader = new BufferedReader( new FileReader( fileName )))
+        {
+            String line = reader.readLine();
+            while ( line != null )
+            {
+                words.add( line );
+                line = reader.readLine();
+            }
+        }
+
+        return words;
     }
 }
