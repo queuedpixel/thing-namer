@@ -74,12 +74,8 @@ public class Parser
 
         // print out the entries
         boolean first = true;
-        int count = 0;
         for ( String entry : entries.keySet() )
         {
-            // only print the first 100 entries
-            if ( count++ >= 100 ) break;
-
             if ( first )
             {
                 first = false;
