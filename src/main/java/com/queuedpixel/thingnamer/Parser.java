@@ -56,7 +56,7 @@ public class Parser
             if (( entry == null ) || ( partOfSpeech == null )) continue;
 
             // ignore words that aren't composed of only letters
-            if ( !entry.matches( "[a-zA-Z]+" )) continue;
+            if ( !entry.matches( "[a-zA-Z][a-z]*" )) continue;
 
             // look for the parts of speech we are interested in
             partOfSpeech = partOfSpeech.trim();
