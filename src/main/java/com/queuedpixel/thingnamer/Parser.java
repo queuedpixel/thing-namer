@@ -58,6 +58,14 @@ public class Parser
             // ignore words that aren't composed of only letters
             if ( !entry.matches( "[a-zA-Z]+" )) continue;
 
+            // look for the parts of speech we are interested in
+            partOfSpeech = partOfSpeech.trim();
+            switch ( partOfSpeech )
+            {
+                case "n." : partOfSpeech = "Noun"; break;
+                default   : continue;
+            }
+
             Set< String > partsOfSpeech;
 
             if ( entries.containsKey( entry ))
