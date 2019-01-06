@@ -58,6 +58,9 @@ public class Parser
             // ignore words that aren't composed of only letters
             if ( !entry.matches( "[a-zA-Z][a-z]*" )) continue;
 
+            // convert the entry to lower case
+            entry = entry.toLowerCase();
+
             // look for the parts of speech we are interested in
             partOfSpeech = partOfSpeech.trim();
             switch ( partOfSpeech )
