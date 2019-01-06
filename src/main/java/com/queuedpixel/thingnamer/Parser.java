@@ -51,10 +51,14 @@ public class Parser
         int count = 0;
         for ( String paragraph : paragraphs )
         {
-            // ignore non-entries
             String entry        = Parser.getEntry(        paragraph );
             String partOfSpeech = Parser.getPartOfSpeech( paragraph );
+
+            // ignore null entries
             if (( entry == null ) || ( partOfSpeech == null )) continue;
+
+            // ignore words that aren't composed of only letters
+            if ( !entry.matches( "[a-zA-Z]+" )) continue;
 
             // only print the first 100 entries
             if ( count++ >= 100 ) break;
