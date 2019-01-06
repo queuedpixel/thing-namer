@@ -50,6 +50,10 @@ public class Parser
         boolean first = true;
         for ( String paragraph : paragraphs )
         {
+            String entry        = Parser.getEntry(        paragraph );
+            String partOfSpeech = Parser.getPartOfSpeech( paragraph );
+            if (( entry == null ) || ( partOfSpeech == null )) continue;
+
             if ( first )
             {
                 first = false;
@@ -59,8 +63,8 @@ public class Parser
                 System.out.println();
             }
 
-            System.out.println( "Entry          : " + Parser.getEntry(        paragraph ));
-            System.out.println( "Part of Speech : " + Parser.getPartOfSpeech( paragraph ));
+            System.out.println( "Entry          : " + entry        );
+            System.out.println( "Part of Speech : " + partOfSpeech );
         }
     }
 
