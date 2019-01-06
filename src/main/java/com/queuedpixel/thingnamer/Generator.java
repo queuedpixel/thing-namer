@@ -38,7 +38,7 @@ public class Generator
     {
         int minSize   = 4;
         int maxSize   = 8;
-        int nameCount = 10;
+        int nameCount = 50;
 
         List< String > adjectives = Generator.readWordList( "adjectives.txt", minSize, maxSize );
         List< String > nouns      = Generator.readWordList( "nouns.txt",      minSize, maxSize );
