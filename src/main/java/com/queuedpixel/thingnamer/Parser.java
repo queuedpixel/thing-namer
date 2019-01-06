@@ -58,18 +58,21 @@ public class Parser
             // ignore words that aren't composed of only letters
             if ( !entry.matches( "[a-zA-Z]+" )) continue;
 
+            Set< String > partsOfSpeech;
+
             if ( entries.containsKey( entry ))
             {
                 // add the part of speech to the existing entry
-                entries.get( entry ).add( partOfSpeech );
+                partsOfSpeech = entries.get( entry );
             }
             else
             {
                 // add a new entry
-                Set< String > partsOfSpeech = new LinkedHashSet<>();
-                partsOfSpeech.add( partOfSpeech );
+                partsOfSpeech = new LinkedHashSet<>();
                 entries.put( entry, partsOfSpeech );
             }
+
+            partsOfSpeech.add( partOfSpeech );
         }
 
         // print out the entries
