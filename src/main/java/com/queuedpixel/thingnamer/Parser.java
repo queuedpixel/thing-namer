@@ -65,8 +65,8 @@ public class Parser
             partOfSpeech = partOfSpeech.trim();
             switch ( partOfSpeech )
             {
-                case "a." : partOfSpeech = "Adjective"; break;
-                case "n." : partOfSpeech = "Noun";      break;
+                case "a." : partOfSpeech = "adjective"; break;
+                case "n." : partOfSpeech = "noun";      break;
                 default   : continue;
             }
 
