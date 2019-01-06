@@ -24,7 +24,7 @@ We'll refer to this directory as `[dictionary folder]`.
 
 To run the dictionary parser:
 
-`java -cp thing-namer-1.0.0-SNAPSHOT.jar com.queuedpixel.thingnamer.Parser [dictionary folder]/CIDE.*`
+`java -cp thing-namer-1.0.0.jar com.queuedpixel.thingnamer.Parser [dictionary folder]/CIDE.*`
 
 ### Name Generator
 
@@ -34,7 +34,7 @@ You must first run the dictionary parser.
 
 To run the name generator:
 
-`java -cp thing-namer-1.0.0-SNAPSHOT.jar com.queuedpixel.thingnamer.Generator`
+`java -cp thing-namer-1.0.0.jar com.queuedpixel.thingnamer.Generator`
 
 ## Contributing
 

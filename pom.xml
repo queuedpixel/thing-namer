@@ -31,7 +31,7 @@ SOFTWARE.
     <groupId>com.queuedpixel</groupId>
     <artifactId>thing-namer</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Thing Namer</name>
     <url>https://github.com/queuedpixel/thing-namer</url>
 
