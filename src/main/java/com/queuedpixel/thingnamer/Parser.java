@@ -27,21 +27,39 @@ SOFTWARE.
 package com.queuedpixel.thingnamer;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.io.FileReader;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
 
 public class Parser
 {
     public static void main( String[] args ) throws Exception
     {
-        StringBuilder builder = new StringBuilder();
-        BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ));
-        String line = reader.readLine();
-        while ( line != null )
+        if ( args.length < 1 )
         {
-            if ( builder.length() > 0 ) builder.append( " " );
-            builder.append( line );
-            line = reader.readLine();
+            System.out.println( "Dictionary file(s) not specified." );
+            System.out.println( "Usage: java com.queuedpixel.thingnamer.Parser [dictionary file(s)]" );
+            return;
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for ( String arg : args )
+        {
+            System.out.println( "Reading dictionary in: " + arg );
+            try ( BufferedReader reader = new BufferedReader( new FileReader( arg )))
+            {
+                String line = reader.readLine();
+                while ( line != null )
+                {
+                    if ( builder.length() > 0 ) builder.append( " " );
+                    builder.append( line );
+                    line = reader.readLine();
+                }
+            }
         }
 
         String contents = builder.toString();
