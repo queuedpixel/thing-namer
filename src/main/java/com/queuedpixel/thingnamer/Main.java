@@ -36,10 +36,12 @@ public class Main
 {
     public static void main( String[] args ) throws Exception
     {
+        int minSize   = 4;
+        int maxSize   = 8;
         int nameCount = 10;
 
-        List< String > nouns      = Main.readWordList( "nouns.txt" );
-        List< String > adjectives = Main.readWordList( "adjectives.txt" );
+        List< String > nouns      = Main.readWordList( "nouns.txt",      minSize, maxSize );
+        List< String > adjectives = Main.readWordList( "adjectives.txt", minSize, maxSize );
 
         Random random = new Random();
         for ( int i = 0; i < nameCount; i++ )
@@ -51,7 +53,7 @@ public class Main
         }
     }
 
-    private static List< String> readWordList(String fileName ) throws Exception
+    private static List< String> readWordList( String fileName, int minSize, int maxSize ) throws Exception
     {
         List< String > words = new ArrayList<>();
 
@@ -60,7 +62,8 @@ public class Main
             String line = reader.readLine();
             while ( line != null )
             {
-                words.add( line );
+                // only add words within our size limits
+                if (( line.length() >= minSize ) && ( line.length() <= maxSize )) words.add( line );
                 line = reader.readLine();
             }
         }
