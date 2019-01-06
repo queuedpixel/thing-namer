@@ -48,8 +48,11 @@ public class Parser
         String contents = builder.toString();
         Collection< String > paragraphs = Parser.getParagraphs( contents );
         boolean first = true;
+        int count = 0;
         for ( String paragraph : paragraphs )
         {
+            if ( count++ >= 100 ) break; // only print the first 100 entries
+
             String entry        = Parser.getEntry(        paragraph );
             String partOfSpeech = Parser.getPartOfSpeech( paragraph );
             if (( entry == null ) || ( partOfSpeech == null )) continue;
