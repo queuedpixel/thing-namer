@@ -33,6 +33,9 @@ public class Parser
 {
     public static void main( String[] args ) throws Exception
     {
+        String paragraphStart = "<p>";
+        String paragraphEnd   = "</p>";
+
         StringBuilder builder = new StringBuilder();
         BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ));
         String line = reader.readLine();
@@ -44,6 +47,17 @@ public class Parser
         }
 
         String contents = builder.toString();
-        System.out.println( contents );
+        int index = 0;
+        while ( contents.indexOf( paragraphStart, index ) >= 0 )
+        {
+            if ( index > 0 ) System.out.println();
+            int start = contents.indexOf( paragraphStart, index );
+            int end   = contents.indexOf( paragraphEnd,   index ) + paragraphEnd.length();
+            String paragraph = contents.substring( start, end );
+            System.out.println( "Start     : " + start     );
+            System.out.println( "End       : " + end       );
+            System.out.println( "Paragraph : " + paragraph );
+            index = end;
+        }
     }
 }
