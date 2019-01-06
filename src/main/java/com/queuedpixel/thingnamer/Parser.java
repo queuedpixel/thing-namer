@@ -68,9 +68,9 @@ public class Parser
         Map< String, Set< String >> entries = new LinkedHashMap<>();
         for ( String paragraph : paragraphs )
         {
-            String entry        = Parser.getTag( paragraph, "<ent>",  "<" );
-            String partOfSpeech = Parser.getTag( paragraph, "<pos>",  "<" );
-            String mark         = Parser.getTag( paragraph, "<mark>", "<" );
+            String entry        = Parser.getTag( paragraph, "<ent>"  );
+            String partOfSpeech = Parser.getTag( paragraph, "<pos>"  );
+            String mark         = Parser.getTag( paragraph, "<mark>" );
 
             // ignore null entries
             if (( entry == null ) || ( partOfSpeech == null )) continue;
@@ -157,10 +157,10 @@ public class Parser
         return strings;
     }
 
-    private static String getTag( String content, String tagStart, String tagEnd )
+    private static String getTag( String content, String tagStart )
     {
         int start = content.indexOf( tagStart );
-        int end   = content.indexOf( tagEnd, start + tagStart.length() );
+        int end   = content.indexOf( "<", start + tagStart.length() );
         if ( start < 0 ) return null;
         start += tagStart.length();
         return content.substring( start, end );
