@@ -28,6 +28,7 @@ package com.queuedpixel.thingnamer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -118,24 +119,13 @@ public class Parser
             partsOfSpeech.add( partOfSpeech );
         }
 
-        // print out the entries
-        boolean first = true;
-        for ( String entry : entries.keySet() )
+        try ( PrintWriter nounWriter      = new PrintWriter( "nouns.txt"      );
+              PrintWriter adjectiveWriter = new PrintWriter( "adjectives.txt" ))
         {
-            if ( first )
+            for ( String entry : entries.keySet() )
             {
-                first = false;
-            }
-            else
-            {
-                System.out.println();
-            }
-
-            System.out.println( "Entry          : " + entry );
-
-            for ( String partOfSpeech : entries.get( entry ))
-            {
-                System.out.println( "Part of Speech : " + partOfSpeech );
+                if ( entries.get( entry ).contains( "noun"      )) nounWriter.println(      entry );
+                if ( entries.get( entry ).contains( "adjective" )) adjectiveWriter.println( entry );
             }
         }
     }
