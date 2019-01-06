@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Main
+public class Generator
 {
     public static void main( String[] args ) throws Exception
     {
@@ -40,8 +40,8 @@ public class Main
         int maxSize   = 8;
         int nameCount = 10;
 
-        List< String > nouns      = Main.readWordList( "nouns.txt",      minSize, maxSize );
-        List< String > adjectives = Main.readWordList( "adjectives.txt", minSize, maxSize );
+        List< String > nouns      = Generator.readWordList( "nouns.txt",      minSize, maxSize );
+        List< String > adjectives = Generator.readWordList( "adjectives.txt", minSize, maxSize );
 
         Random random = new Random();
         for ( int i = 0; i < nameCount; i++ )
