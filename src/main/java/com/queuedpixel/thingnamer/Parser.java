@@ -28,8 +28,7 @@ package com.queuedpixel.thingnamer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Parser
 {
@@ -47,8 +46,7 @@ public class Parser
 
         String contents = builder.toString();
         Collection< String > paragraphs = Parser.getParagraphs( contents );
-        boolean first = true;
-        int count = 0;
+        Map< String, Set< String >> entries = new LinkedHashMap<>();
         for ( String paragraph : paragraphs )
         {
             String entry        = Parser.getEntry(        paragraph );
@@ -60,6 +58,25 @@ public class Parser
             // ignore words that aren't composed of only letters
             if ( !entry.matches( "[a-zA-Z]+" )) continue;
 
+            if ( entries.containsKey( entry ))
+            {
+                // add the part of speech to the existing entry
+                entries.get( entry ).add( partOfSpeech );
+            }
+            else
+            {
+                // add a new entry
+                Set< String > partsOfSpeech = new LinkedHashSet<>();
+                partsOfSpeech.add( partOfSpeech );
+                entries.put( entry, partsOfSpeech );
+            }
+        }
+
+        // print out the entries
+        boolean first = true;
+        int count = 0;
+        for ( String entry : entries.keySet() )
+        {
             // only print the first 100 entries
             if ( count++ >= 100 ) break;
 
@@ -72,8 +89,12 @@ public class Parser
                 System.out.println();
             }
 
-            System.out.println( "Entry          : " + entry        );
-            System.out.println( "Part of Speech : " + partOfSpeech );
+            System.out.println( "Entry          : " + entry );
+
+            for ( String partOfSpeech : entries.get( entry ))
+            {
+                System.out.println( "Part of Speech : " + partOfSpeech );
+            }
         }
     }
 
