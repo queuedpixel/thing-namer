@@ -115,7 +115,16 @@ public class Parser
         while ( contents.indexOf( paragraphStart, index ) >= 0 )
         {
             int start = contents.indexOf( paragraphStart, index );
-            int end   = contents.indexOf( paragraphEnd,   index ) + paragraphEnd.length();
+            int end   = contents.indexOf( paragraphEnd,   index );
+
+            // ignore paragraphs with no start tag
+            if ( end < start )
+            {
+                index = start;
+                continue;
+            }
+
+            end += paragraphEnd.length();
             strings.add( contents.substring( start, end ));
             index = end;
         }
@@ -125,18 +134,18 @@ public class Parser
 
     private static String getEntry( String paragraph )
     {
-        return Parser.getTag( paragraph, "<ent>", "</ent>" );
+        return Parser.getTag( paragraph, "<ent>", "<" );
     }
 
     private static String getPartOfSpeech( String paragraph )
     {
-        return Parser.getTag( paragraph, "<pos>", "</pos>" );
+        return Parser.getTag( paragraph, "<pos>", "<" );
     }
 
     private static String getTag( String content, String tagStart, String tagEnd )
     {
         int start = content.indexOf( tagStart );
-        int end   = content.indexOf( tagEnd   );
+        int end   = content.indexOf( tagEnd, start + tagStart.length() );
         if ( start < 0 ) return null;
         start += tagStart.length();
         return content.substring( start, end );
