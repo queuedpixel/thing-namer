@@ -51,11 +51,13 @@ public class Parser
         int count = 0;
         for ( String paragraph : paragraphs )
         {
-            if ( count++ >= 100 ) break; // only print the first 100 entries
-
+            // ignore non-entries
             String entry        = Parser.getEntry(        paragraph );
             String partOfSpeech = Parser.getPartOfSpeech( paragraph );
             if (( entry == null ) || ( partOfSpeech == null )) continue;
+
+            // only print the first 100 entries
+            if ( count++ >= 100 ) break;
 
             if ( first )
             {
